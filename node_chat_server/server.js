@@ -10,7 +10,7 @@ socketIOStatic.on('connection', (socket) => {
   console.log('New user connected: ', socket.id);
   socket.on('new-message', (message) => {
     console.log('New message from: ', socket.id, ' Message: ', message);
-    socketIOStatic.emit('new-message', 'emit:' + message);
+    socketIOStatic.emit('new-message', socket.id + '|' + message);
   });
 });
 
