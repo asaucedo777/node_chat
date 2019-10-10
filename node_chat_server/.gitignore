@@ -1,0 +1,4 @@
+# Test coverage dir
+coverage
+# Dependencies directory
+node_modules

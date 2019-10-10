@@ -1,0 +1,35 @@
+{
+  "name": "node_chat_server",
+  "version": "1.0.0",
+  "description": "Server chat based on Node and JavaScript",
+  "main": "server.js",
+  "author": "Alejandro Saucedo Villanueva",
+  "license": "ISC",
+  "keywords": [
+    "node",
+    "javascript",
+    "chat",
+    "socket",
+    "server"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asaucedo777/node_chat/node_chat_server.git"
+  },
+  "scripts": {
+    "eslint": "eslint \"src/**/*.js\" --quiet -fix",
+    "test": "jest --forceExit --coverage --verbose",
+    "nodemon": "nodemon --inspect server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "jest": "^24.9.0",
+    "supertest": "4.0.2",
+    "nodemon": "^1.19.2"
+  }
+}
