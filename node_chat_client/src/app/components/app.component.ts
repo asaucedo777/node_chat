@@ -10,7 +10,8 @@ import { ChatService } from '../services/chat.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'node_chat_client';
+  connecteds = '';
+  socketId = '';
   message: string;
   messages: string[];
   secretCode: string;
@@ -21,14 +22,29 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     this.chatService
-      .getMessages();
+      .getMessages()
+      .subscribe((msg: string) => {
+        console.log('msg: ', msg);
+        const msgSplit = msg.split('|');
+        let message = '';
+        if (msgSplit.length === 1) {
+          this.socketId = 'pendiente';
+          message = msgSplit[0];
+        } else {
+          this.socketId = msgSplit[0];
+          message = msgSplit[1];
+        }
+        const currentTime = moment().format('hh:mm:ss a');
+        const messageWithTimestamp = `${currentTime} - ${this.socketId}: ${message}`;
+        this.messages.push(messageWithTimestamp);
+        if (!this.connecteds.includes(this.socketId)) {
+          this.connecteds += this.socketId + ' ';
+        }
+      });
   }
   sendMessage() {
-    this.chatService.sendMessage(this.message);
-    const currentTime = moment().format('hh-mm:ss a');
-    const msgWithTimeStamp = `${currentTime}: ${this.message}`;
-    this.messages
-      .push(msgWithTimeStamp);
+    this.chatService
+      .sendMessage(this.message);
     this.message = '';
   }
 }
